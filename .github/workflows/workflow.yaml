@@ -27,4 +27,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: "example-web-app-codeseoul-beege"
-        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/ecommerce:${{ github_sha }}
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/ecommerce:${{ github.sha }}
