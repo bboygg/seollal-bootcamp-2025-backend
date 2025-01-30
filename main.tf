@@ -11,6 +11,9 @@ provider "azurerm" {
   features {}
 }
 
+data "azurerm_subscription" "current" {
+}
+
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "Korea South"
@@ -49,4 +52,19 @@ resource "azurerm_container_registry" "registry" {
   location            = azurerm_resource_group.example.location
   sku                 = "Basic"
   admin_enabled       = true
+}
+
+resource "azurerm_user_assigned_identity" "example" {
+  location            = azurerm_resource_group.example.location
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+}
+
+resource "azurerm_federated_identity_credential" "example" {
+  name                = "bootcamp"
+  resource_group_name = azurerm_resource_group.example.name
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = "https://token.actions.githubusercontent.com"
+  parent_id           = azurerm_user_assigned_identity.example.id
+  subject             = "repo:CodeSeoul/seollal-bootcamp-2025-backend:environment:production"
 }
