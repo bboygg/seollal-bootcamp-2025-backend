@@ -95,6 +95,9 @@ docker compose down
 6. Set up terraform: `source .env && terraform init`.
 7. Deploy your web app: `source .env && terraform apply`.
     * DON'T FORGET TO TEARDOWN SO YOU DON'T SPEND MONEY.
+8. Create the necessary Github Actions secrets in your Github repository settings.
+9. Update `.github/workflows/workflow.yaml` to use the login server shown by terraform and the username and password found in Azure Portal for your container registry.
+10. Update `.github/workflows/workflow.yaml` to use your `app-name` you set in step 1.
 
 ### Teardown
 

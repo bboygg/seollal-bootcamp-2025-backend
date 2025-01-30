@@ -42,3 +42,11 @@ resource "azurerm_linux_web_app" "example" {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
   }
 }
+
+resource "azurerm_container_registry" "registry" {
+  name                = "bootcamp"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  sku                 = "Basic"
+  admin_enabled       = true
+}
