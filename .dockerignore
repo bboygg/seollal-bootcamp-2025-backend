@@ -13,5 +13,10 @@ alembic.ini
 tests/
 __pycache__
 *.egg-info
-.github
+*.tfstate
+.terraform
+.ruff_cache
+.env
+.env.template
 *.tf
+.github
