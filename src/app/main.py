@@ -1,6 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 
+from app.routes.metrics import router as metrics_router
 from app.routes.order import router as order_router
 from app.routes.product import router as product_router
 from app.settings import Settings
@@ -15,6 +17,9 @@ app = FastAPI()
 # prefix. This allows you to logically split your application logic.
 app.include_router(product_router, prefix="/products")
 app.include_router(order_router, prefix="/orders")
+app.include_router(metrics_router, prefix="/metrics")
+
+Instrumentator().instrument(app).expose(app)
 
 
 # From our pyproject.toml, we define this main function as our entrypoint.
